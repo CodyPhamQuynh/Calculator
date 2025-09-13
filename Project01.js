@@ -10,11 +10,32 @@ function append(value) {
         display.textContent = "";
     display.textContent += value;
 }
+// function calculate() {
+//     try {
+//         display.textContent = eval(display.textContent)//.replace('+','/').replace('x','*'));
+//     }
+//     catch {
+//         display.textContent = 'Error';
+//     }
+// }
+
 function calculate() {
     try {
-        display.textContent = eval(display.textContent)//.replace('+','/').replace('x','*'));
-    }
-    catch {
+        let expression = display.textContent;
+
+    // Regex để tìm một số theo sau là dấu %
+        const regex = /(\d+\.?\d*)%/g;
+
+    // Thay thế các phép tính phần trăm. Ví dụ: "200%"" thành "(200/100)"
+        expression = expression.replace(regex, '($1/100)');
+
+    // Thay thế các phép tính "số * số%" thành "số * (số/100)"
+        const multRegex = /(\d+\.?\d*)\s*\*\s*(\d+\.?\d*)%/g;
+        expression = expression.replace(multRegex, '$1 * ($2/100)');
+
+        display.textContent = eval(expression);
+    } 
+    catch (error) {
         display.textContent = 'Error';
     }
 }
@@ -32,4 +53,5 @@ document.addEventListener('keydown',(e) => {
     else if (e.key === 'Escape') {
         clearDisplay();
     }
+
 })
