@@ -16,7 +16,7 @@ body {
     width: 320px;
 }
 .display {
-    width: 100%;
+    width: 94%;
     height: 60px;
     background: rgba(0,0,0,0.6);
     color: #fff;
@@ -48,4 +48,5 @@ button:hover {
 }
 .equal:hover {
     background: #2196f3;
+
 }
